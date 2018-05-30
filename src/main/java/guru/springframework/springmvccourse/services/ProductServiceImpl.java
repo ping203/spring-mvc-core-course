@@ -38,6 +38,12 @@ public class ProductServiceImpl implements ProductService {
         return product;
     }
 
+    @Override
+    public void delete(Integer id) {
+        Objects.requireNonNull(products.get(id));
+        products.remove(id);
+    }
+
     private Integer getNextKey(){
         return Collections.max(products.keySet()) + 1;
     }
