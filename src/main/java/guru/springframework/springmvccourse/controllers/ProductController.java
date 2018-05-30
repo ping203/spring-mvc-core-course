@@ -40,6 +40,12 @@ public class ProductController {
         return "productform";
     }
 
+    @GetMapping("/product/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        model.addAttribute("product", productService.get(id));
+        return "productform";
+    }
+
     @PostMapping("/product")
     public String saveOrUpdate(Product product) {
         Product saveOrUpdateProduct = productService.saveOrUpdate(product);
