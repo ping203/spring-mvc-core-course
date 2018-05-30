@@ -5,19 +5,10 @@ import java.math.BigDecimal;
 /**
  * Created by yriyMitsiuk on 30.05.2018.
  */
-public class Product {
-    private Integer id;
+public class Product extends AbstractDomainObject {
     private String description;
     private BigDecimal price;
     private String imageUrl;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
 
     public String getDescription() {
         return description;
