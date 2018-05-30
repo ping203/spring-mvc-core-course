@@ -22,7 +22,7 @@
                 <td th:text="${customer.lastName}"></td>
                 <td th:text="${customer.email}"></td>
                 <td th:text="${customer.phoneNumber}"></td>
-                <td><a th:href="${'/customer/'+customer.id}">View</a></td>
+                <td><a th:href="${'/customer/view/'+customer.id}">View</a></td>
                 <td><a th:href="${'/customer/edit/'+customer.id}">Edit</a></td>
                 <td><a th:href="${'/customer/delete/'+customer.id}">Delete</a></td>
             </tr>
