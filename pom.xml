@@ -26,6 +26,8 @@
         <!--webjars-->
         <webjars-bootstrap.version>4.1.0</webjars-bootstrap.version>
         <webjars-jquery.version>3.3.1-1</webjars-jquery.version>
+        <!-- Apache Commons -->
+        <apache.commons.version>3.7</apache.commons.version>
     </properties>
 
     <dependencies>
@@ -59,6 +61,14 @@
             <groupId>org.webjars</groupId>
             <artifactId>bootstrap</artifactId>
             <version>${webjars-bootstrap.version}</version>
+        </dependency>
+
+        <!-- Apache Commons -->
+        <!-- https://mvnrepository.com/artifact/org.apache.commons/commons-lang3 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>${apache.commons.version}</version>
         </dependency>
 
     </dependencies>
