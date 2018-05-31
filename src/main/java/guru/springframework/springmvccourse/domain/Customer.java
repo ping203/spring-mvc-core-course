@@ -1,8 +1,12 @@
 package guru.springframework.springmvccourse.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.Version;
+
 /**
  * Created by yriyMitsiuk on 30.05.2018.
  */
+@Entity
 public class Customer extends AbstractDomainObject {
     private String firstName;
     private String lastName;
@@ -13,6 +17,17 @@ public class Customer extends AbstractDomainObject {
     private String city;
     private String state;
     private String zipCode;
+
+    @Version
+    private Integer version;
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
     public String getFirstName() {
         return firstName;
