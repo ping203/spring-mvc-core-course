@@ -5,7 +5,6 @@ import org.junit.Test;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
-
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -18,11 +17,9 @@ public class IndexControllerTest {
 
     private MockMvc mockMvc;
 
-    private IndexController indexController;
-
     @Before
     public void setup() {
-        indexController = new IndexController();
+        IndexController indexController = new IndexController();
         mockMvc = MockMvcBuilders.standaloneSetup(indexController).build();
     }
 
