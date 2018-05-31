@@ -24,7 +24,7 @@ public class ProductController {
         this.productService = productService;
     }
 
-    @GetMapping("/products")
+    @GetMapping({"/products", "/"})
     public String getAll(Model model) {
         model.addAttribute("products", productService.getAll());
         return "product/products";

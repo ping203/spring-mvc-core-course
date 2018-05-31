@@ -1,5 +1,6 @@
 package guru.springframework.springmvccourse.services;
 
+import guru.springframework.springmvccourse.domain.AbstractDomainObject;
 import guru.springframework.springmvccourse.domain.Customer;
 import org.springframework.stereotype.Service;
 
@@ -9,47 +10,33 @@ import java.util.*;
  * Created by yriyMitsiuk on 30.05.2018.
  */
 @Service
-public class CustomerServiceImpl implements CustomerService {
-
-    private Map<Integer, Customer> customerservice;
-
-    public CustomerServiceImpl() {
-        loadCustomers();
-    }
+public class CustomerServiceImpl extends AbstractService implements CustomerService {
 
     @Override
-    public List<Customer> getAll() {
-        return new ArrayList<>(customerservice.values());
+    public List<AbstractDomainObject> getAll() {
+        return super.getAll();
     }
 
     @Override
     public Customer get(Integer id) {
-        Objects.requireNonNull(customerservice.get(id), "Customer with specified id doesn't exist");
-        return customerservice.get(id);
+        Objects.requireNonNull(domainObjectMap.get(id), "Customer with specified id doesn't exist");
+        return (Customer) super.get(id);
     }
 
     @Override
     public Customer saveOrUpdate(Customer customer) {
         Objects.requireNonNull(customer, "Customer can't be null");
-        if (customer.isNew()) {
-            customer.setId(getNextKey());
-        }
-        customerservice.put(customer.getId(), customer);
-        return customer;
+        return (Customer) super.saveOrUpdate(customer);
     }
 
     @Override
     public void delete(Integer id) {
-        Objects.requireNonNull(customerservice.get(id), "Customer with specified id doesn't exist");
-        customerservice.remove(id);
+        Objects.requireNonNull(domainObjectMap.get(id), "Customer with specified id doesn't exist");
+       super.delete(id);
     }
 
-    private Integer getNextKey(){
-        return Collections.max(customerservice.keySet()) + 1;
-    }
-
-    private void loadCustomers() {
-        customerservice = new HashMap<>();
+    @Override
+    protected void loadDomainObjects() {
         Customer customer1 = new Customer();
         customer1.setId(1);
         customer1.setFirstName("Micheal");
@@ -83,8 +70,8 @@ public class CustomerServiceImpl implements CustomerService {
         customer3.setEmail("sam@burnnotice.com");
         customer3.setPhoneNumber("305.426.9832");
 
-        customerservice.put(1, customer1);
-        customerservice.put(2, customer2);
-        customerservice.put(3, customer3);
+        domainObjectMap.put(1, customer1);
+        domainObjectMap.put(2, customer2);
+        domainObjectMap.put(3, customer3);
     }
 }
