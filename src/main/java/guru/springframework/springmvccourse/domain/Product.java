@@ -1,6 +1,7 @@
 package guru.springframework.springmvccourse.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.Version;
 import java.math.BigDecimal;
 
 /**
@@ -11,6 +12,17 @@ public class Product extends AbstractDomainObject {
     private String description;
     private BigDecimal price;
     private String imageUrl;
+
+    @Version
+    private Integer version;
+
+    public Integer getVersion() {
+        return version;
+    }
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
 
     public String getDescription() {
         return description;
