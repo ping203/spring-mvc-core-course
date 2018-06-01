@@ -2,15 +2,17 @@ package guru.springframework.springmvccourse.services;
 
 import guru.springframework.springmvccourse.domain.AbstractDomainObject;
 import guru.springframework.springmvccourse.domain.Product;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
-
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by yriyMitsiuk on 30.05.2018.
  */
 @Service
+@Profile("map")
 public class ProductServiceImpl extends AbstractService implements ProductService {
 
     @Override
