@@ -32,7 +32,7 @@ public class CustomerServiceJpaDaoImplTest {
     @Test
     public void testGetAll() {
         List<Customer> customers = (List<Customer>) customerService.getAll();
-        assert customers.size() == 3;
+        assert customers.size() > 0;
     }
 
     @Test
@@ -46,7 +46,6 @@ public class CustomerServiceJpaDaoImplTest {
     }
 
     @Test
-    @Ignore
     public void testSave() {
         Customer newCustomer = new Customer();
         newCustomer.setFirstName("Alex");
@@ -57,10 +56,11 @@ public class CustomerServiceJpaDaoImplTest {
         newCustomer.setZipCode("33101");
         newCustomer.setEmail("alex@burnnotice.com");
         newCustomer.setPhoneNumber("305.333.0115");
-        customerService.saveOrUpdate(newCustomer);
-        assertEquals(customerService.get(9).getFirstName(), newCustomer.getFirstName());
-        assertEquals(customerService.get(9).getLastName(), newCustomer.getLastName());
-        assertEquals(customerService.get(9).getCity(), newCustomer.getCity());
+        Customer savedCustomer = customerService.saveOrUpdate(newCustomer);
+        assert savedCustomer.getId() != null;
+        assertEquals(newCustomer.getFirstName(), savedCustomer.getFirstName());
+        assertEquals(newCustomer.getLastName(), savedCustomer.getLastName());
+        assertEquals(newCustomer.getCity(), savedCustomer.getCity());
     }
 
     @Test
@@ -75,7 +75,6 @@ public class CustomerServiceJpaDaoImplTest {
     }
 
     @Test
-    @Ignore
     public void testDelete() {
         Integer id = 7;
         customerService.delete(id);
