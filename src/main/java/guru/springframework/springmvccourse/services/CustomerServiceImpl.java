@@ -2,6 +2,7 @@ package guru.springframework.springmvccourse.services;
 
 import guru.springframework.springmvccourse.domain.AbstractDomainObject;
 import guru.springframework.springmvccourse.domain.Customer;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -10,6 +11,7 @@ import java.util.*;
  * Created by yriyMitsiuk on 30.05.2018.
  */
 @Service
+@Profile("map")
 public class CustomerServiceImpl extends AbstractService implements CustomerService {
 
     @Override

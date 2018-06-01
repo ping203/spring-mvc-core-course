@@ -24,7 +24,7 @@ public class CustomerController {
         this.service = service;
     }
 
-    @GetMapping("/customers")
+    @GetMapping({"/customers", "/"})
     public String getAll(Model model) {
         model.addAttribute("customers", service.getAll());
         return "customer/customers";
