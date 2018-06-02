@@ -1,9 +1,7 @@
 package guru.springframework.springmvccourse.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.Transient;
-import javax.persistence.Version;
+import javax.persistence.*;
 
 @Entity
 public class User extends AbstractDomainObject {
@@ -18,6 +16,9 @@ public class User extends AbstractDomainObject {
 
     private String encryptedPassword;
     private Boolean enabled = true;
+
+    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    private Customer customer;
 
     public Integer getVersion() {
         return version;
@@ -57,5 +58,14 @@ public class User extends AbstractDomainObject {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Customer getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
+        customer.setUser(this);
     }
 }
