@@ -1,6 +1,8 @@
 package guru.springframework.springmvccourse.domain;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.OneToOne;
 import javax.persistence.Version;
 
 /**
@@ -17,6 +19,9 @@ public class Customer extends AbstractDomainObject {
     private String city;
     private String state;
     private String zipCode;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    private User user;
 
     @Version
     private Integer version;
@@ -99,5 +104,13 @@ public class Customer extends AbstractDomainObject {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

@@ -2,6 +2,7 @@ package guru.springframework.springmvccourse.services.jpa;
 
 import guru.springframework.springmvccourse.config.JpaIntegrationConfig;
 import guru.springframework.springmvccourse.domain.Customer;
+import guru.springframework.springmvccourse.domain.User;
 import guru.springframework.springmvccourse.services.CustomerService;
 import org.junit.Ignore;
 import org.junit.Test;
@@ -57,8 +58,15 @@ public class CustomerServiceJpaDaoImplTest {
         newCustomer.setZipCode("33101");
         newCustomer.setEmail("alex@burnnotice.com");
         newCustomer.setPhoneNumber("305.333.0115");
+
+        User newUser = new User();
+        newUser.setUsername("This is my user name");
+        newUser.setPassword("MyAwesomePassword");
+        newCustomer.setUser(newUser);
+
         Customer savedCustomer = customerService.saveOrUpdate(newCustomer);
         assert savedCustomer.getId() != null;
+        assert savedCustomer.getUser().getId() != null;
         assertEquals(newCustomer.getFirstName(), savedCustomer.getFirstName());
         assertEquals(newCustomer.getLastName(), savedCustomer.getLastName());
         assertEquals(newCustomer.getCity(), savedCustomer.getCity());
