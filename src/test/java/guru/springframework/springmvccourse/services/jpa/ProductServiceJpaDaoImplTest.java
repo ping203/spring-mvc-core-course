@@ -37,7 +37,7 @@ public class ProductServiceJpaDaoImplTest {
     @Test
     public void testGetAll() {
         List<Product> products = (List<Product>) productService.getAll();
-        assert products.size() > 0;
+        assert products.size() == 5;
     }
 
     @Test
@@ -57,6 +57,7 @@ public class ProductServiceJpaDaoImplTest {
         assertEquals(product.getDescription(),savedProduct.getDescription());
         assertEquals(product.getImageUrl(), savedProduct.getImageUrl());
         assertEquals(product.getPrice(), savedProduct.getPrice());
+        productService.delete(savedProduct.getId());
     }
 
     @Test
@@ -69,11 +70,5 @@ public class ProductServiceJpaDaoImplTest {
         assertEquals(product.getDescription(), productService.get(1).getDescription());
         assertEquals(product.getImageUrl(), productService.get(1).getImageUrl());
         assertEquals(product.getPrice(), productService.get(1).getPrice());
-    }
-
-    @Test
-    public void delete() {
-        productService.delete(2);
-        assert productService.get(2) == null;
     }
 }
