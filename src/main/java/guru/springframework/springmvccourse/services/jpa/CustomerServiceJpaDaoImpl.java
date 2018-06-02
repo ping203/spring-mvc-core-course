@@ -1,6 +1,7 @@
-package guru.springframework.springmvccourse.services;
+package guru.springframework.springmvccourse.services.jpa;
 
 import guru.springframework.springmvccourse.domain.Customer;
+import guru.springframework.springmvccourse.services.CustomerService;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

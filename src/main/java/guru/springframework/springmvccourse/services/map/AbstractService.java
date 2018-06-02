@@ -1,4 +1,4 @@
-package guru.springframework.springmvccourse.services;
+package guru.springframework.springmvccourse.services.map;
 
 import guru.springframework.springmvccourse.domain.AbstractDomainObject;
 
@@ -13,7 +13,6 @@ public abstract class AbstractService {
 
     public AbstractService() {
         domainObjectMap = new HashMap<>();
-        loadDomainObjects();
     }
 
     public List<AbstractDomainObject> getAll() {
@@ -37,8 +36,7 @@ public abstract class AbstractService {
     }
 
     private Integer getNextKey(){
+        if (domainObjectMap.size() == 0) return 1;
         return Collections.max(domainObjectMap.keySet()) + 1;
     }
-
-    protected abstract void loadDomainObjects();
 }
