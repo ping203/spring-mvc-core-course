@@ -1,7 +1,8 @@
-package guru.springframework.springmvccourse.services;
+package guru.springframework.springmvccourse.services.jpa;
 
 import guru.springframework.springmvccourse.config.JpaIntegrationConfig;
 import guru.springframework.springmvccourse.domain.Product;
+import guru.springframework.springmvccourse.services.ProductService;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
