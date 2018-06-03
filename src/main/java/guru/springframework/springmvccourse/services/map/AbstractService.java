@@ -24,7 +24,7 @@ public abstract class AbstractService {
     }
 
     public AbstractDomainObject saveOrUpdate(AbstractDomainObject object) {
-        if (object.isNew()) {
+        if (object.getId() == null) {
             object.setId(getNextKey());
         }
         domainObjectMap.put(object.getId(), object);

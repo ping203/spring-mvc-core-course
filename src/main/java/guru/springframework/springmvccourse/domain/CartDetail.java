@@ -5,22 +5,13 @@ import javax.persistence.*;
 @Entity
 public class CartDetail extends AbstractDomainObject {
 
-    @Version
-    private Integer version;
-
     @OneToOne
     private Product product;
 
     @ManyToOne
     private Cart cart;
 
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
+    private Integer quantity;
 
     public Product getProduct() {
         return product;
@@ -36,5 +27,13 @@ public class CartDetail extends AbstractDomainObject {
 
     public void setCart(Cart cart) {
         this.cart = cart;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
     }
 }

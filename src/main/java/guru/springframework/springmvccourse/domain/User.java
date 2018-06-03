@@ -6,9 +6,6 @@ import javax.persistence.*;
 @Entity
 public class User extends AbstractDomainObject {
 
-    @Version
-    private Integer version;
-
     private String username;
 
     @Transient
@@ -22,14 +19,6 @@ public class User extends AbstractDomainObject {
 
     @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
     private Cart cart;
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public String getUsername() {
         return username;

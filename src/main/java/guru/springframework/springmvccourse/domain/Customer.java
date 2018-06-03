@@ -15,20 +15,9 @@ public class Customer extends AbstractDomainObject {
     @OneToOne(cascade = CascadeType.ALL)
     private User user;
 
-    @Version
-    private Integer version;
-
     private Address billingAddress;
 
     private Address shippingAddress;
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public String getFirstName() {
         return firstName;

@@ -7,22 +7,11 @@ import java.util.List;
 @Entity
 public class Cart extends AbstractDomainObject {
 
-    @Version
-    private Integer version;
-
     @OneToOne
     private User user;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "cart", orphanRemoval = true)
     private List<CartDetail> cartDetails = new ArrayList<>();
-
-    public Integer getVersion() {
-        return version;
-    }
-
-    public void setVersion(Integer version) {
-        this.version = version;
-    }
 
     public User getUser() {
         return user;
