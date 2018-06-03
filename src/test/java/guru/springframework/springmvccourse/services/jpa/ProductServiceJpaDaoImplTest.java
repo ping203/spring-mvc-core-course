@@ -66,9 +66,9 @@ public class ProductServiceJpaDaoImplTest {
         product.setDescription("Product 1 Updated");
         product.setPrice(new BigDecimal("17.75"));
         product.setImageUrl("http://example.com/product6/updated");
-        productService.saveOrUpdate(product);
-        assertEquals(product.getDescription(), productService.get(1).getDescription());
-        assertEquals(product.getImageUrl(), productService.get(1).getImageUrl());
-        assertEquals(product.getPrice(), productService.get(1).getPrice());
+        Product updatedProduct = productService.saveOrUpdate(product);
+        assertEquals(product.getDescription(), updatedProduct.getDescription());
+        assertEquals(product.getImageUrl(), updatedProduct.getImageUrl());
+        assertEquals(product.getPrice(), updatedProduct.getPrice());
     }
 }
