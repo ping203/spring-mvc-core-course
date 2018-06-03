@@ -1,6 +1,7 @@
 package guru.springframework.springmvccourse.services.jpa;
 
 import guru.springframework.springmvccourse.config.JpaIntegrationConfig;
+import guru.springframework.springmvccourse.domain.Address;
 import guru.springframework.springmvccourse.domain.Customer;
 import guru.springframework.springmvccourse.domain.User;
 import guru.springframework.springmvccourse.services.CustomerService;
@@ -42,9 +43,9 @@ public class CustomerServiceJpaDaoImplTest {
         Customer customer = customerService.get(6);
         assertEquals("Micheal", customer.getFirstName());
         assertEquals("Weston", customer.getLastName());
-        assertEquals("Miami", customer.getCity());
-        assertEquals("33101", customer.getZipCode());
         assertEquals("micheal@burnnotice.com", customer.getEmail());
+        assertEquals("Miami", customer.getBillingAddress().getCity());
+        assertEquals("33101", customer.getBillingAddress().getZipCode());
     }
 
     @Test
@@ -52,10 +53,11 @@ public class CustomerServiceJpaDaoImplTest {
         Customer newCustomer = new Customer();
         newCustomer.setFirstName("Alex");
         newCustomer.setLastName("Burchuk");
-        newCustomer.setAddressLine1("2 Main St");
-        newCustomer.setCity("Miami");
-        newCustomer.setState("Florida");
-        newCustomer.setZipCode("33101");
+        newCustomer.setBillingAddress(new Address());
+        newCustomer.getBillingAddress().setAddressLine1("1 Main St");
+        newCustomer.getBillingAddress().setCity("Miami");
+        newCustomer.getBillingAddress().setState("Florida");
+        newCustomer.getBillingAddress().setZipCode("33101");
         newCustomer.setEmail("alex@burnnotice.com");
         newCustomer.setPhoneNumber("305.333.0115");
 
@@ -69,7 +71,7 @@ public class CustomerServiceJpaDaoImplTest {
         assert savedCustomer.getUser().getId() != null;
         assertEquals(newCustomer.getFirstName(), savedCustomer.getFirstName());
         assertEquals(newCustomer.getLastName(), savedCustomer.getLastName());
-        assertEquals(newCustomer.getCity(), savedCustomer.getCity());
+        assertEquals(newCustomer.getBillingAddress().getCity(), savedCustomer.getBillingAddress().getCity());
     }
 
     @Test
@@ -77,10 +79,15 @@ public class CustomerServiceJpaDaoImplTest {
         Customer customer = customerService.get(6);
         customer.setFirstName("Micheal Updated");
         customer.setLastName("Weston Updated");
-        customer.setCity("Miami Updated");
-        assertEquals("Micheal Updated", customer.getFirstName());
-        assertEquals("Weston Updated", customer.getLastName());
-        assertEquals("Miami Updated", customer.getCity());
+        customer.setBillingAddress(new Address());
+        customer.getBillingAddress().setAddressLine1("1 Main St");
+        customer.getBillingAddress().setCity("Miami");
+        customer.getBillingAddress().setState("Florida");
+        customer.getBillingAddress().setZipCode("33101");
+        Customer updatedCustomer = customerService.saveOrUpdate(customer);
+        assertEquals("Micheal Updated", updatedCustomer.getFirstName());
+        assertEquals("Weston Updated", updatedCustomer.getLastName());
+        assertEquals("Miami", updatedCustomer.getBillingAddress().getCity());
     }
 
     @Test

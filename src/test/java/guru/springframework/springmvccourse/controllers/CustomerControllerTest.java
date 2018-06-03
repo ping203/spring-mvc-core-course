@@ -1,5 +1,6 @@
 package guru.springframework.springmvccourse.controllers;
 
+import guru.springframework.springmvccourse.domain.Address;
 import guru.springframework.springmvccourse.domain.Customer;
 import guru.springframework.springmvccourse.services.CustomerService;
 import org.junit.Before;
@@ -100,8 +101,6 @@ public class CustomerControllerTest {
                 .andExpect(model().attribute("customer", hasProperty("id", is(id))))
                 .andExpect(model().attribute("customer", hasProperty("firstName", is(params.getFirst("firstName")))))
                 .andExpect(model().attribute("customer", hasProperty("email", is(params.getFirst("email")))))
-                .andExpect(model().attribute("customer", hasProperty("city", is(params.getFirst("city")))))
-                .andExpect(model().attribute("customer", hasProperty("zipCode", is(params.getFirst("zipCode")))))
                 .andDo(print());
 
         ArgumentCaptor<Customer> boundCustomer = ArgumentCaptor.forClass(Customer.class);
@@ -110,8 +109,6 @@ public class CustomerControllerTest {
         assertEquals(id, boundCustomer.getValue().getId());
         assertEquals(params.getFirst("firstName"), boundCustomer.getValue().getFirstName());
         assertEquals(params.getFirst("email"), boundCustomer.getValue().getEmail());
-        assertEquals(params.getFirst("city"), boundCustomer.getValue().getCity());
-        assertEquals(params.getFirst("zipCode"), boundCustomer.getValue().getZipCode());
     }
 
     @Test
@@ -141,10 +138,11 @@ public class CustomerControllerTest {
         customer.setLastName(params.getFirst("lastName"));
         customer.setEmail(params.getFirst("email"));
         customer.setPhoneNumber(params.getFirst("phoneNumber"));
-        customer.setAddressLine1(params.getFirst("addressLine1"));
-        customer.setCity(params.getFirst("city"));
-        customer.setState(params.getFirst("state"));
-        customer.setZipCode(params.getFirst("zipCode"));
+        customer.setBillingAddress(new Address());
+        customer.getBillingAddress().setAddressLine1(params.getFirst("addressLine1"));
+        customer.getBillingAddress().setCity(params.getFirst("city"));
+        customer.getBillingAddress().setState(params.getFirst("state"));
+        customer.getBillingAddress().setZipCode(params.getFirst("zipCode"));
         return customer;
     }
 }
