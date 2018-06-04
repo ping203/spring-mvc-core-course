@@ -2,8 +2,11 @@ package guru.springframework.springmvccourse.bootstrap;
 
 import guru.springframework.springmvccourse.domain.Address;
 import guru.springframework.springmvccourse.domain.Customer;
+import guru.springframework.springmvccourse.domain.Order;
 import guru.springframework.springmvccourse.domain.Product;
+import guru.springframework.springmvccourse.enums.OrderStatus;
 import guru.springframework.springmvccourse.services.CustomerService;
+import guru.springframework.springmvccourse.services.OrderService;
 import guru.springframework.springmvccourse.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
@@ -11,6 +14,8 @@ import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * Created by yriyMitsiuk on 01.06.2018.
@@ -20,17 +25,20 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
 
     private ProductService productService;
     private CustomerService customerService;
+    private OrderService orderService;
 
     @Autowired
-    public SpringJPABootstrap(ProductService productService, CustomerService customerService) {
+    public SpringJPABootstrap(ProductService productService, CustomerService customerService, OrderService orderService) {
         this.productService = productService;
         this.customerService = customerService;
+        this.orderService = orderService;
     }
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent contextRefreshedEvent) {
         loadProducts();
         loadCustomers();
+        loadOrders();
     }
 
     private void loadProducts() {
@@ -101,5 +109,29 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
         customer3.setEmail("sam@burnnotice.com");
         customer3.setPhoneNumber("305.426.9832");
         customerService.saveOrUpdate(customer3);
+    }
+
+    private void loadOrders() {
+        Order order1 = new Order();
+        order1.setCustomer(customerService.get(8));
+        order1.setDateShipped(LocalDate.of(2018, Month.AUGUST, 23));
+        order1.setShippingAddress(new Address());
+        order1.getShippingAddress().setAddressLine1("1 Key Biscane Ave");
+        order1.getShippingAddress().setCity("Miami");
+        order1.getShippingAddress().setState("Florida");
+        order1.getShippingAddress().setZipCode("33101");
+        order1.setStatus(OrderStatus.NEW);
+        orderService.saveOrUpdate(order1);
+
+        Order order2 = new Order();
+        order2.setCustomer(customerService.get(8));
+        order2.setDateShipped(LocalDate.of(2018, Month.AUGUST, 15));
+        order2.setShippingAddress(new Address());
+        order2.getShippingAddress().setAddressLine1("1 Key Biscane Ave");
+        order2.getShippingAddress().setCity("Miami");
+        order2.getShippingAddress().setState("Florida");
+        order2.getShippingAddress().setZipCode("33101");
+        order2.setStatus(OrderStatus.ALLOCATED);
+        orderService.saveOrUpdate(order2);
     }
 }
