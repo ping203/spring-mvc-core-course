@@ -1,11 +1,13 @@
 package guru.springframework.springmvccourse.services.jpa;
 
 import guru.springframework.springmvccourse.config.JpaIntegrationConfig;
+import guru.springframework.springmvccourse.domain.Address;
 import guru.springframework.springmvccourse.domain.Order;
 import guru.springframework.springmvccourse.domain.OrderDetail;
 import guru.springframework.springmvccourse.enums.OrderStatus;
 import guru.springframework.springmvccourse.services.OrderService;
 import guru.springframework.springmvccourse.services.ProductService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,16 +46,16 @@ public class OrderServiceJpaDaoImplTest {
 
     @Test
     public void testGet() {
-        Order order = orderService.get(9);
-        assertEquals(OrderStatus.NEW, order.getStatus());
-        assertEquals("Miami", order.getShippingAddress().getCity());
-        assertEquals("Florida", order.getShippingAddress().getState());
+        Order order = orderService.get(12);
+        assert order != null;
+        assertEquals(OrderStatus.SHIPPED, order.getStatus());
     }
 
     @Test
     public void testSaveOrUpdate() {
-        Order order = orderService.get(9);
+        Order order = new Order();
         order.setStatus(OrderStatus.SHIPPED);
+        order.setShippingAddress(new Address());
         order.getShippingAddress().setZipCode("30102");
 
         OrderDetail orderDetail1 = new OrderDetail();
@@ -75,7 +77,7 @@ public class OrderServiceJpaDaoImplTest {
 
     @Test
     public void testDelete() {
-        Integer id = 10;
+        Integer id = 14;
         orderService.delete(id);
         assert orderService.get(id) == null;
     }

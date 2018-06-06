@@ -25,12 +25,14 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
     private ProductService productService;
     private UserService userService;
     private OrderService orderService;
+    private CustomerService customerService;
 
     @Autowired
-    public SpringJPABootstrap(ProductService productService, UserService userService, OrderService orderService) {
+    public SpringJPABootstrap(ProductService productService, UserService userService, OrderService orderService, CustomerService customerService) {
         this.productService = productService;
         this.userService = userService;
         this.orderService = orderService;
+        this.customerService = customerService;
     }
 
     @Override
@@ -133,6 +135,7 @@ public class SpringJPABootstrap implements ApplicationListener<ContextRefreshedE
             Order order = new Order();
             order.setCustomer(user.getCustomer());
             order.setStatus(OrderStatus.SHIPPED);
+            orderService.saveOrUpdate(order);
 
             products.forEach(product -> {
                 OrderDetail orderDetail = new OrderDetail();
